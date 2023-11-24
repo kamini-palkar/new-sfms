@@ -95,8 +95,7 @@
                     <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
                         id="kt_app_header_wrapper">
 
-
-                 
+                        
                         <!--begin::Menu wrapper-->
                         <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true"
                             data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}"
@@ -108,16 +107,10 @@
                             <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
                                 id="kt_app_header_menu" data-kt-menu="true">
                                 <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                                <div data-kt-menu-trigger="{default: 'click', lg: 'hoverss'}"
                                     data-kt-menu-placement="bottom-start"
-                                    class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link-->
-                                    <!--<span class="menu-link">
-											<span class="menu-title">Home</span>
-											 <span class="menu-arrow d-lg-none"></span>
-										</span>-->
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
+                                    class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 mess-lg-2">
+                                    <span style="padding-left:650px;">Secured Files Management System</span>
                                     <div
                                         class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px">
                                         <!--begin:Dashboards menu-->
@@ -5125,8 +5118,10 @@
                                 <div class="cursor-pointer symbol symbol-30px symbol-md-40px"
                                     data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                     data-kt-menu-placement="bottom-end">
-                                    <span class="badge badge-success" style="margin-right:10px;">Active</span><img
-                                        alt="Logo" src="{{url('assets/media/avatars/blank.png')}}" />
+                                    <span  style="margin-right:10px;"></span><img
+                                        alt="Logo" src="{{url('assets/media/avatars/Avatare-m-1.jpg')}}" />
+
+                                      
                                 </div>
                                 <!--begin::User account menu-->
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -5136,7 +5131,8 @@
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-50px me-5">
-                                                <img alt="Logo" src="{{url('assets/media/avatars/blank.png')}}" />
+                                            <img
+                                        alt="Logo" src="{{url('assets/media/avatars/Avatare-m-1.jpg')}}" />
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Username-->

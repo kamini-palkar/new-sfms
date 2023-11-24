@@ -5,7 +5,9 @@
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
             <a href="../../demo1/dist/index.html">
 
-                <h5 style="display:inline;color:#fff;vertical-align:middel">SFMS</h5>
+              
+				<img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;"/>
+				
             </a>
 
             <div id="kt_app_sidebar_toggle"
@@ -30,7 +32,7 @@
                     data-kt-menu="true" data-kt-menu-expand="false">
                     <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                         <span class="menu-link">
-                            <span class="menu-icon">
+                            <span class="menu-icon pr-3">
                                 <i class="ki-duotone ki-element-11 fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -52,7 +54,16 @@
                                 </a>
 
                             </div>
+							<div class="menu-item">
+                                <a class="menu-link active" href="">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">ORGANISATION</span>
 
+                                </a>
+
+                            </div>
 
 
                             <!-- <div class="menu-item">
