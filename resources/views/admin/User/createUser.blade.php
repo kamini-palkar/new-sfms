@@ -76,21 +76,21 @@
 
                                     <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
 
-                                    
-                                    <div class="col">
+
+                                        <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
                                                     <span class="">ORGANISATION</span>
                                                 </label>
-                                                
+
                                                 <select name="organisation_id" id="organisation_id"
                                                     class="form-control form-control-solids"
                                                     style="border: 1px solid black; padding-top:0px; padding-bottom:0px;">
-                                                   
+
                                                     <option value="">select</option>
-                                                    <option value="12">User 1</option>
-                                                    <option value="1">User 2</option>
-                                                    <option value="22">User 3</option>
+                                                    @foreach($data as $key=>$value)
+                                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                                    @endforeach
                                                 </select>
 
                                                 @error('organisation_id')
@@ -98,7 +98,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
@@ -108,18 +107,12 @@
                                                     class="form-control form-control-solids"
                                                     value="{{old('organisation_code')}}" autocomplete="off"
                                                     style="border: 1px solid black; padding: 13px;"
-                                                    oninput="removeBorderStyle(this)">
-
+                                                    oninput="removeBorderStyle(this)" readOnly>
                                                 @error('organisation_code')
                                                 <div id="Errormsg">{{ $message }}</div>
                                                 @enderror
-
                                             </div>
                                         </div>
-
-
-
-                                        
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
@@ -217,17 +210,42 @@
         }
     </style>
 
-    <script>
-        function removeBorderStyle(element) {
-            if (element.value.trim() !== '') {
-                element.style.border = 'none';
-                element.style.padding = '13px';
-            } else {
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+       
+       <script>
+    $('#organisation_id').on('change', function() {
+        var selectedOrganisationId = $(this).val();
 
-                element.style.border = '1px solid black';
-                element.style.padding = '13px';
+        console.log(selectedOrganisationId);
+
+        jQuery.ajax({
+            url: "{{ url('get-organisation-code') }}/" + selectedOrganisationId,
+            type: 'GET',
+            success: function(data) {
+                $('#organisation_code').val(data.organisation_code);
+            },
+            error: function(error) {
+                console.log(error);
             }
+        });
+    });
+
+    function removeBorderStyle(element) {
+        if (element.value.trim() !== '') {
+            element.style.border = 'none';
+            element.style.padding = '13px';
+        } else {
+            element.style.border = '1px solid black';
+            element.style.padding = '13px';
         }
-    </script>
+    }
+</script>
+
+
+    
+
+  
+   
 
     @endsection

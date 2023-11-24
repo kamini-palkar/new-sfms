@@ -7,10 +7,6 @@
 </div>
 </div>
 </div>
-
-
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
 <main class="py-4">
@@ -47,8 +43,6 @@
 
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                 <div>
-
-                           
                                     <a href="{{route('create-user')}}" class="btn btn-outline-info"
                                         role="button">ADD USER</a>
                                 </div>
@@ -94,12 +88,10 @@
                                     <th id="th">USERNAME</th>
                                     <th id="th">ORGANISATION ID</th>
                                     <th id="th">ORGANISATION CODE</th>
-                                    <th id="th">Actions</th>
+                                    <th id="th">ACTIONS</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-
                             </tbody>
                         </table>
                     </div>
