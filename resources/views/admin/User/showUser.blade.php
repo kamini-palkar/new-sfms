@@ -9,6 +9,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 <main class="py-4">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="toolbar" id="kt_toolbar">
@@ -43,7 +44,7 @@
 
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                 <div>
-                                    <a href="{{route('create-user')}}" class="btn btn-outline-info"
+                                    <a href="{{route('create-user')}}" class="btn btn-primary"
                                         role="button">ADD USER</a>
                                 </div>
                                 <br>
@@ -72,10 +73,12 @@
             <br>
             <div id="kt_content_container" class="container-xxl">
                 <div class="card">
-                    <div class="card-header border-0 pt-6">
+                    <div class="card-header border-1 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
                                 &nbsp;
+
+                                Users List
 
                             </div>
                         </div>
@@ -84,7 +87,7 @@
                         <table class="table align-middle table-row-dashed fs-7 gy-5" id="tableYajra">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th id="th">ID</th>
+                                    <th id="th">SR NO</th>
                                     <th id="th">USERNAME</th>
                                     <th id="th">ORGANISATION ID</th>
                                     <th id="th">ORGANISATION CODE</th>
@@ -105,7 +108,7 @@
     <body>
         <style>
         #th:hover {
-            color: #202020;
+            color: grey;
         }
         </style>
         <script>

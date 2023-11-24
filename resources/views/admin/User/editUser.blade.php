@@ -11,7 +11,7 @@
 
 </div>
 
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 <main class="py-4">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -52,8 +52,12 @@
             <div class="card">
                 <div class="card-header border-2 pt-6">
                     <div class="card-title">
+
+               
                         <div class="d-flex align-items-center position-relative my-1">
                             &nbsp;
+
+                           Edit User
                         </div>
                     </div>
                 </div>
@@ -72,7 +76,6 @@
 
                             <div class="card-body pt-5">
                                 <form method="POST" id="form" action="/update-user/{{encrypt($editUser->id)}}">
-                             
                                     @csrf
 
                                     <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
@@ -82,9 +85,10 @@
                                                     <span class="">ORGANISATION</span>
                                                 </label>
 
-                                                <select name="organisation_id" id="organisation_id" disabled
+                                                <select name="organisation_id" id="organisation_id"
                                                     class="form-control form-control-solids"
-                                                    style="border: 1px solid black; padding-top:0px; padding-bottom:0px;">
+                                                    style="border: 1px solid black; padding-top:0px; padding-bottom:0px;"
+                                                    disabled>
                                                     <option value="">select</option>
                                                     @foreach($data as $key => $value)
                                                     <option value="{{ $value->id }}" @if($value->id ==
@@ -92,6 +96,7 @@
                                                     </option>
                                                     @endforeach
                                                 </select>
+
 
                                                 @error('organisation_id')
                                                 <div id="Errormsg">{{ $message }}</div>
@@ -163,6 +168,7 @@
                                                 <div id="Errormsg">{{ $message }}</div>
                                                 @enderror
                                             </div>
+                                           
                                         </div>
 
                                     </div>
@@ -212,27 +218,46 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
+   
     <script>
-    $(        ganisation_id').on('change', function() {
-                   lectedOrganisationId = $(this).val();
+        $('#organisation_id').on('change', function () {
+            var selectedOrganisationId = $(this).val();
 
-                  e.log(selectedOrganisationId);
+            console.log(selectedOrganisationId);
 
-                  .ajax({
-                      {{ url('get-organisation-code') }}/" + selectedOrganisationId,
-                      'GET',
-                      s: function(data)  {
-                          ganisation_code').val(data.organisation_code);
-                                          function(error ) {
-                          e.log(error);
-                                      })           fu        on removeBorderStyle(element) {
-                  ement.value.trim() !== '') {
-                      t.style.border = 'none';
-                      t.style.padding = '13px';
-                   {
-                      t.style.border = '1px solid black';
-                      t.style.padding = '13px';
-                  }
+            jQuery.ajax({
+                url: "{{ url('get-organisation-code') }}/" + selectedOrganisationId,
+                type: 'GET',
+                success: function (data) {
+                    $('#organisation_code').val(data.organisation_code);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+        $("#togglePassword").click(function() {
+            var passwordInput = $("#password");
+            var type = passwordInput.attr("type");
+            
+            if (type === "password") {
+                passwordInput.attr("type", "text");
+            } else {
+                passwordInput.attr("type", "password");
+            }
+        });
+    });
+
+        function removeBorderStyle(element) {
+            if (element.value.trim() !== '') {
+                element.style.border = 'none';
+                element.style.padding = '13px';
+            } else {
+                element.style.border = '1px solid black';
+                element.style.padding = '13px';
+            }
+        }
     </script>
     @endsection

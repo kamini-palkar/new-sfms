@@ -8,10 +8,8 @@
 </div>
 </div>
 </div>
-
 </div>
-
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 <main class="py-4">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -54,6 +52,7 @@
                     <div class="card-title">
                         <div class="d-flex align-items-center position-relative my-1">
                             &nbsp;
+                            <span>Add User</span>
                         </div>
                     </div>
                 </div>
@@ -210,7 +209,6 @@
         }
     </style>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
        
        <script>
