@@ -43,7 +43,7 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion">
                             <div class="menu-item">
-                                <a class="menu-link active" href="">
+                                <a class="menu-link active" href="{{route('show-user')}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -52,9 +52,6 @@
                                 </a>
 
                             </div>
-
-
-
 
 
 

@@ -30,12 +30,6 @@
                             </div>
                         </div>
 
-
-
-
-
-
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
@@ -69,6 +63,8 @@
                             </div>
                         </div>
 
+
+                       
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-3 text-center">
