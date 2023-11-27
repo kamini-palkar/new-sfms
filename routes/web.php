@@ -49,11 +49,13 @@ Route::post('/upload-file', [App\Http\Controllers\FileUploadController::class, '
 
 
 
+Route::get('/show-files', [App\Http\Controllers\FileUploadController::class, 'showFile'])->name('show-files');
 
 
 
 
 
+Route::get('/delete-file/{id}', [App\Http\Controllers\FileUploadController::class, 'destroyFile'])->name('delete-file');
 
 
 
