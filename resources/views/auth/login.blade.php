@@ -10,16 +10,13 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-
-
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Org Code') }}</label>
+                            <label for="org_code" class="col-md-4 col-form-label text-md-end">{{ __('Org Code') }}</label>
 
                             <div class="col-md-6">
                                 <input id="organisation_code" type="text"
                                     class="form-control @error('organisation_code') is-invalid @enderror"
-                                    name="organisation_code" value="{{ old('organisation_code') }}" required
+                                    name="organisation_code" value="{{ old('organisation_code') }}" 
                                     autocomplete="organisation_code" autofocus>
 
                                 @error('organisation_code')
@@ -36,9 +33,9 @@
                             <div class="col-md-6">
                                 <input id="email" type="text"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
-                                    value="{{ old('username') }}" required autocomplete="email" autofocus>
+                                    value="{{ old('username') }}"  autocomplete="username" autofocus>
 
-                                @error('email')
+                                @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -53,7 +50,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="current-password">
+                                     autocomplete="current-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">

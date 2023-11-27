@@ -5,9 +5,9 @@
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
             <a href="../../demo1/dist/index.html">
 
-              
-				<img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;"/>
-				
+
+                <img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;" />
+
             </a>
 
             <div id="kt_app_sidebar_toggle"
@@ -53,7 +53,7 @@
                                 </a>
 
                             </div>
-							<div class="menu-item">
+                            <div class="menu-item">
                                 <a class="menu-link" href="">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -65,4 +65,29 @@
                         </div>
                     </div>
 
-					
+
+                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon pr-3">
+                                <i class="ki-duotone ki-element-12 fs-2 text-warning">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">FILE UPLOAD</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link" href="/showFiles">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Upload Files</span>
+                                </a>
+                            </div>
+                           
+                        </div>
+                    </div>
