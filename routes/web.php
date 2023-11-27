@@ -37,5 +37,29 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('/delete-user/{id}', [App\Http\Controllers\UsersController::class, 'destroyUser'])->name('delete-user');
 
+// file upload module
+
+
+Route::get('/upload-file', function () {
+    return view('admin.Files.uploadFile');
+});
+
+
+Route::post('/upload-file', [App\Http\Controllers\FileUploadController::class, 'storeFiles'])->name('upload-file');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 ?>
