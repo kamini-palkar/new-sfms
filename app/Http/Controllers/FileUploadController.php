@@ -15,7 +15,6 @@ class FileUploadController extends Controller
    
 public function storeFiles(Request $request)
 {
-
     $files = $request->file('name' , []);
     if ($files) {
         foreach ($files as $file) {

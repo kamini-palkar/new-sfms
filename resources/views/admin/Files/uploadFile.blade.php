@@ -82,6 +82,8 @@
                                                     <input type="file" name="name[]" id="organisation_code"
                                                         class="form-control" autocomplete="off"
                                                         oninput="removeBorderStyle(this)">
+
+                                                        <span id="errorDiv" style="color:red;"></span>
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
@@ -138,7 +140,46 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      
+        $('#submit').on('click', function(e) {
+            
+            var fileInputs = $('input[type="file"]');
+            var atLeastOneFileSelected = false;
 
+           
+            var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif' , 'xlsx']; 
+
+            fileInputs.each(function() {
+                var files = $(this).get(0).files;
+                if (files.length > 0) {
+                    atLeastOneFileSelected = true;
+
+                    for (var i = 0; i < files.length; i++) {
+                        var fileName = files[i].name;
+                        var fileExtension = fileName.split('.').pop().toLowerCase();
+
+                        if (allowedExtensions.indexOf(fileExtension) === -1) {
+                         
+                            e.preventDefault();
+                            $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif , xlsx).');
+                            return;
+                        }
+                    }
+                    $('#errorDiv').text('');
+                    return false; 
+                }
+            });
+
+           
+            if (!atLeastOneFileSelected) {
+                e.preventDefault();
+                $('#errorDiv').text('Please select at least one file.');
+            }
+        });
+    });
+</script>
 
 
     <script type="text/javascript">

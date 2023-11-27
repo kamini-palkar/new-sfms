@@ -90,7 +90,7 @@
                                     <th id="th">SR NO</th>
                                     <th id="th">FILE</th>
                                     <th id="th">ORGANISATION CODE</th>
-                                    <th id="th">ACTIONS</th>
+                                    <th id="th">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
