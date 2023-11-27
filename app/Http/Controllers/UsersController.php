@@ -48,6 +48,7 @@ class UsersController extends Controller
             $storeUser->created_at = now();
             $storeUser->updated_at = now();
             $storeUser->save();
+          
 
             DB::commit();
         } catch (Exception $exception) {

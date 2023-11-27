@@ -13,5 +13,7 @@ class FileUploadModel extends Model
 
     protected $table ="files";
 
+    
+
     protected $guarded = [];
 }

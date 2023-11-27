@@ -110,7 +110,7 @@
                                 <div data-kt-menu-trigger="{default: 'click', lg: 'hoverss'}"
                                     data-kt-menu-placement="bottom-start"
                                     class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 mess-lg-2">
-                                    <span style="padding-left:650px;">Secured Files Management System</span>
+                                    <span style="padding-left:650px;">SeQR Files Management System</span>
                                     <div
                                         class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px">
                                         <!--begin:Dashboards menu-->

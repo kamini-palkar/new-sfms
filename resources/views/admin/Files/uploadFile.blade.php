@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="card-body pt-5">
-                                <form method="POST" id="form" action="">
+                                <form method="POST" id="form" action="{{route('upload-file')}}" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
@@ -85,9 +85,7 @@
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
-                                                    @error('organisation_code')
-                                                    <div id="Errormsg">{{ $message }}</div>
-                                                    @enderror
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -154,14 +152,14 @@
 
         //Once add button is clicked
         $(addButton).click(function() {
-            //Check maximum number of input fields
+           
             if (x < maxField) {
-                x++; //Increment field counter
-                $(wrapper).append(fieldHTML); //Add field html
+                x++; 
+                $(wrapper).append(fieldHTML); 
             }
         });
 
-        //Once remove button is clicked
+       
         $(wrapper).on('click', '.remove_button', function(e) {
             e.preventDefault();
             $(this).parent('div').remove();
