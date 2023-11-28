@@ -135,7 +135,7 @@
                         name: 'org_code',
                         render: function(data, type, full, meta) {
                     
-                    return '<span class="badge bg-warning" style="margin-left:70px;">' + data + '</span>';
+                    return '<span class="badge badge-success" style="margin-left:63px;">' + data + '</span>';
                 }
                     },
                     
