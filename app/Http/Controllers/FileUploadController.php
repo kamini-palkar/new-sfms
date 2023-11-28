@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\FileUploadModel;
+use App\Models\OrganisationMasterModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -36,13 +38,13 @@ class FileUploadController extends Controller
 
     public function storeFiles(Request $request)
     {
+        
         $files = $request->file('name', []);
 
         $fileCount = count($files);
 
         if ($fileCount > 0) {
            
-
             foreach ($files as $file) {
                 $add = new FileUploadModel;
                 $add->name = $file->getClientOriginalName();
@@ -64,12 +66,20 @@ class FileUploadController extends Controller
                 $add->updated_at = now();
                 $add->save();
             }
+            $url="http://files.seqr.info";
 
+            $regardsName = auth()->user()->name;
+            $id_for_mail =auth()->user()->organisation_id;
+
+             $organisation_name = DB::table('organisation_master')->where('id' , $id_for_mail)->get();
+             $nameForMail=$organisation_name[0]->name;
+        
             $email = $request->input('email');
-            $data["title"] = "From SeQR Files Management System";
-            $data["body"] = "Files have been uploaded. Total files attached: $fileCount";
-            $data["data"] = "SFMS('SeQR Files Management System')";
-            Mail::send('demoMail', $data, function ($message) use ($data, $email) {
+            $data["title"] = "$nameForMail Sent You Files";
+            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for Details";
+            $data["regardsName"] =$regardsName;
+
+            Mail::send('demoMail', $data, function ($message) use ($data, $email , $regardsName) {
                 $message->to($email, $email)
                     ->subject($data["title"]);
 
@@ -78,7 +88,6 @@ class FileUploadController extends Controller
             Session::flash('message', 'Mail not sent.');
             return redirect('show-files');
         }
-
         Session::flash('message', 'File Added Successfully.!');
         return redirect('show-files');
     }

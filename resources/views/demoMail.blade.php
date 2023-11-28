@@ -10,6 +10,6 @@
     <p>Thank you.</p>
 
     <span>Regards,</span><br>
-    <span></html>SFMS('SeQR Files Management System')
+    <span></html>{{$regardsName}}
 </span><br>
 </body>

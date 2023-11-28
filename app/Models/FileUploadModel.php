@@ -12,8 +12,8 @@ class FileUploadModel extends Model
     use SoftDeletes;
 
     protected $table ="files";
-
-    
-
     protected $guarded = [];
+
+
+  
 }
