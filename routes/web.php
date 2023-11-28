@@ -37,6 +37,38 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('/delete-user/{id}', [App\Http\Controllers\UsersController::class, 'destroyUser'])->name('delete-user');
 
+
+
+    // organisation module
+
+    Route::get('/show-organisation',function(){
+        return view('admin.Organisation.showOrganisation');
+       });
+    
+    Route::get('/create-organisation',function(){
+        return view('admin.Organisation.createOrganisation');
+       });
+    
+    
+       Route::post('/create-organisation', [App\Http\Controllers\OrganisationController::class, 'storeOrganisation'])->name('create-organisation');
+    Route::get('/show-organisation', [App\Http\Controllers\OrganisationController::class, 'showOrganisation'])->name('show-organisation');
+    
+    
+    Route::get('/delete-organisation/{id}', [App\Http\Controllers\OrganisationController::class, 'destroyOrganisation'])->name('delete-organisation');
+    
+    Route::get('/edit-organisation/{id}', [App\Http\Controllers\OrganisationController::class, 'editOrganisation'])->name('edit-organisation');
+    
+    Route::post('/update-organisation/{id}', [App\Http\Controllers\OrganisationController::class, 'updateOrganisation'])->name('update-organisation');
+
+
+
+
+
+
+
+
+
+
 // file upload module
 
 
@@ -50,10 +82,6 @@ Route::post('/upload-file', [App\Http\Controllers\FileUploadController::class, '
 
 
 Route::get('/show-files', [App\Http\Controllers\FileUploadController::class, 'showFile'])->name('show-files');
-
-
-
-
 
 Route::get('/delete-file/{id}', [App\Http\Controllers\FileUploadController::class, 'destroyFile'])->name('delete-file');
 

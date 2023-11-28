@@ -141,6 +141,9 @@
 
                     }
                 ],
+                order: [
+                  [0, 'desc'] 
+                 ],
                 rowCallback: function(row, data, index) {
                     var api = this.api();
                     var startIndex = api.page() * api.page.len();

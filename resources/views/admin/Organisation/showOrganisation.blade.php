@@ -37,15 +37,15 @@
                                 <li class="breadcrumb-item">
                                     <span class="bullet bg-gray-300 w-5px h-2px"></span>
                                 </li>
-                                <li class="breadcrumb-item text-dark">Uploaded Files Listing</li>
+                                <li class="breadcrumb-item text-dark">Customer Listing</li>
                             </ul>
                         </div>
                         <div class="d-flex align-items-center gap-2 gap-lg-3">
 
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                 <div>
-                                    <a href="{{route('upload-file')}}" class="btn btn-primary"
-                                        role="button">UPLOAD FILE</a>
+                                    <a href="{{route('create-organisation')}}" class="btn btn-primary"
+                                        role="button">ADD ORGANISATION</a>
                                 </div>
                                 <br>
                             </div>
@@ -78,7 +78,7 @@
                             <div class="d-flex align-items-center position-relative my-1">
                                 &nbsp;
 
-                              Files
+                               Organisation List
 
                             </div>
                         </div>
@@ -88,9 +88,9 @@
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th id="th">SR NO</th>
-                                    <th id="th">FILE</th>
-                                    <th id="th">ORGANISATION CODE</th>
-                                    <th id="th">ACTION</th>
+                                    <th id="th">ORGANISATION NAME</th>
+                                    <th id="th"> ORGANISATION CODE</th>
+                                    <th id="th">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,20 +115,20 @@
             var table = $('#tableYajra').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('show-files') }}",
+                ajax: "{{ route('show-organisation') }}",
                 columns: [{
-                        data: 'id',
-                        name: 'id'
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
                     },
                     {
                         data: 'name',
                         name: 'name'
                     },
+                  
                     {
-                        data: 'org_code',
-                        name: 'org_code'
+                        data: 'code',
+                        name: 'code'
                     },
-                    
                     {
                         data: 'action',
                         name: 'action',
@@ -137,9 +137,6 @@
 
                     }
                 ],
-                order: [
-                  [0, 'desc'] 
-                 ],
                 rowCallback: function(row, data, index) {
                     var api = this.api();
                     var startIndex = api.page() * api.page.len();

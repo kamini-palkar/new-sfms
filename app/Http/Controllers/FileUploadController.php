@@ -40,7 +40,6 @@ public function storeFiles(Request $request)
             $add->name = $file->getClientOriginalName(); 
             $add->org_code = auth()->user()->organisation_code;
             $uniqueId = $this->generateUniqueId($add->org_code);
-
             $currentYear = now()->year;
             $currentMonth = now()->month;
 
