@@ -76,7 +76,7 @@ class FileUploadController extends Controller
         
             $email = $request->input('email');
             $data["title"] = "$nameForMail Sent You Files";
-            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for Details";
+            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for Details.";
             $data["regardsName"] =$regardsName;
 
             Mail::send('demoMail', $data, function ($message) use ($data, $email , $regardsName) {
