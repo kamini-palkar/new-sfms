@@ -84,7 +84,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Upload Files</span>
+                                    <span class="menu-title">UPLOAD FILES</span>
                                 </a>
                             </div>
                            

@@ -66,7 +66,8 @@
                             </div>
 
                             <div class="card-body pt-5">
-                                <form method="POST" id="form" action="{{route('upload-file')}}" enctype="multipart/form-data">
+                                <form method="POST" id="form" action="{{route('upload-file')}}"
+                                    enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
@@ -83,21 +84,23 @@
                                                         class="form-control" autocomplete="off"
                                                         oninput="removeBorderStyle(this)">
 
-                                                        <span id="errorDiv" style="color:red;"></span>
+                                                    <span id="errorDiv" style="color:red;"></span>
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" name="email" class="form-control" placeholder="Enter Email Address  :" autocomplete="off" style="margin-left:10px;width: 345px;" required >
+                                            <input type="text" name="email" class="form-control"
+                                                placeholder="Enter Email Address  :" autocomplete="off"
+                                                style="margin-left:10px;width: 345px;" required>
                                         </div>
                                     </div>
-                                    
+
                                     <br>
                                     <div style="float:right;">
 
@@ -117,8 +120,15 @@
                                     </div>
                                 </form>
                             </div>
+
                         </div>
-                    </div>
+                        </div>
+                        <div class="marquee-container" style="width:100%">
+                                <div class="marquee-content" style="padding-top:20px; color:red">
+                                   
+                                    Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span>   You Can Upload Maximum 10 Files At a Time.</span> 
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
@@ -132,28 +142,50 @@
 
 
     <style>
-        #organisation_code-error {
-            color: red;
-            padding-top: 15px;
+    #organisation_code-error {
+        color: red;
+        padding-top: 15px;
 
+    }
+
+    #Errormsg {
+        color: red;
+        margin-top: 10px;
+
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
         }
 
-        #Errormsg {
-            color: red;
-            margin-top: 10px;
-
+        100% {
+            transform: translateX(-100%);
         }
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        white-space: nowrap;
+        width:100%;
+    }
+
+    .marquee-content {
+        display: inline-block;
+        width:100%;
+        animation: marquee 18s linear infinite;
+    }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function() {
-      
+
         $('#submit').on('click', function(e) {
-            
+
             var fileInputs = $('input[type="file"]');
             var atLeastOneFileSelected = false;
-            var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif' , 'xlsx']; 
+            var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx'];
 
             fileInputs.each(function() {
                 var files = $(this).get(0).files;
@@ -165,25 +197,27 @@
                         var fileExtension = fileName.split('.').pop().toLowerCase();
 
                         if (allowedExtensions.indexOf(fileExtension) === -1) {
-                         
+
                             e.preventDefault();
-                            $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif , xlsx).');
+                            $('#errorDiv').text(
+                                'Please select a valid file type (jpg, jpeg, png, gif , xlsx).'
+                                );
                             return;
                         }
                     }
                     $('#errorDiv').text('');
-                    return false; 
+                    return false;
                 }
             });
 
-           
+
             if (!atLeastOneFileSelected) {
                 e.preventDefault();
                 $('#errorDiv').text('Please select at least one file.');
             }
         });
     });
-</script>
+    </script>
     <script type="text/javascript">
     $(document).ready(function() {
         var maxField = 10;
@@ -195,10 +229,10 @@
 
         //Once add button is clicked
         $(addButton).click(function() {
-           
+
             if (x < maxField) {
-                x++; 
-                $(wrapper).append(fieldHTML); 
+                x++;
+                $(wrapper).append(fieldHTML);
             }
         });
         $(wrapper).on('click', '.remove_button', function(e) {
@@ -207,7 +241,7 @@
             x--;
         });
     });
-</script>
+    </script>
 
 
 

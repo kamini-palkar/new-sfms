@@ -78,7 +78,7 @@
                             <div class="d-flex align-items-center position-relative my-1">
                                 &nbsp;
 
-                              Files
+                             List Of Files
 
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th id="th">SR NO</th>
                                     <th id="th">UNIQUE ID</th>
-                                    <th id="th">FILE</th>
+                                    <th id="th">FILE NAME</th>
                                     <th id="th">ORGANISATION CODE</th>
                                     <th id="th">ACTION</th>
                                 </tr>
@@ -132,7 +132,11 @@
                     },
                     {
                         data: 'org_code',
-                        name: 'org_code'
+                        name: 'org_code',
+                        render: function(data, type, full, meta) {
+                    
+                    return '<span class="badge bg-warning" style="margin-left:70px;">' + data + '</span>';
+                }
                     },
                     
                     {
