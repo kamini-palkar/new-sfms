@@ -49,7 +49,7 @@ class FileUploadController extends Controller
                 $currentYear = now()->year;
                 $currentMonth = now()->month;
 
-                $publicPath = public_path("Organisation-Code/{$add->org_code}/{$currentYear}/{$currentMonth}");
+                $publicPath = public_path("Organisation/{$add->org_code}/{$currentYear}/{$currentMonth}");
 
                 if (!File::isDirectory($publicPath)) {
                     File::makeDirectory($publicPath, 0755, true);
@@ -77,8 +77,10 @@ class FileUploadController extends Controller
             $validatedEmails = array_filter($validatedEmails, 'filter_var', FILTER_VALIDATE_EMAIL);
             
             $data["title"] = "$nameForMail Sent You Files";
-            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for more Details.";
+            $data["body"] = " You have received $fileCount Files . Please log in to the  $url to view sent files.";
             $data["regardsName"] = $regardsName;
+            $data["filesForMail"] = $files;
+
 
             Mail::send('demoMail', $data, function ($message) use ($data,  $validatedEmails, $regardsName) {
                 $message->to( $validatedEmails,  $validatedEmails)
@@ -145,9 +147,5 @@ class FileUploadController extends Controller
         Session::flash('message', 'File Deleted Successfully.!');
         return redirect('show-files');
     }
-
-
-
-
 
 }

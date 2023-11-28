@@ -126,7 +126,7 @@
                         <div class="marquee-container" style="width:100%">
                                 <div class="marquee-content" style="padding-top:20px; color:red">
                                    
-                                    Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span>   You Can Upload Maximum 10 Files At a Time.</span> 
+                                    Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span>   You can upload maximum 10 files  and multiple emails at a Time.</span> 
                                 </div>
                             </div>
                 </div>
@@ -173,7 +173,7 @@
     .marquee-content {
         display: inline-block;
         width:100%;
-        animation: marquee 18s linear infinite;
+        animation: marquee 20s linear infinite;
     }
     </style>
 
@@ -242,9 +242,4 @@
         });
     });
     </script>
-
-
-
-
-
     @endsection

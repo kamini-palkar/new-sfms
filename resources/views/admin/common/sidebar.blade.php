@@ -3,7 +3,7 @@
         data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
         data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
-            <a href="../../demo1/dist/index.html">
+            <a>
 
 
                 <img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;" />
