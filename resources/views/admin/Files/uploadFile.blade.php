@@ -92,7 +92,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="email" name="email" class="form-control" placeholder="Enter Email Address  :" autocomplete="off" style="margin-left:10px;width: 345px;" required >
+                                        </div>
+                                    </div>
                                     
                                     <br>
                                     <div style="float:right;">
@@ -105,6 +109,8 @@
                                             <button type="submit" id="submit" data-kt-contacts-type="submit"
                                                 class="btn btn-primary">
                                                 <span class="indicator-label">Save</span>
+
+
                                             </button>
                                         </div>
 
@@ -178,8 +184,6 @@
         });
     });
 </script>
-
-
     <script type="text/javascript">
     $(document).ready(function() {
         var maxField = 10;
@@ -197,8 +201,6 @@
                 $(wrapper).append(fieldHTML); 
             }
         });
-
-       
         $(wrapper).on('click', '.remove_button', function(e) {
             e.preventDefault();
             $(this).parent('div').remove();

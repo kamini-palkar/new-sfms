@@ -88,6 +88,7 @@
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                     <th id="th">SR NO</th>
+                                    <th id="th">UNIQUE ID</th>
                                     <th id="th">FILE</th>
                                     <th id="th">ORGANISATION CODE</th>
                                     <th id="th">ACTION</th>
@@ -119,6 +120,11 @@
                 columns: [{
                         data: 'id',
                         name: 'id'
+                    },
+
+                    {
+                        data: 'unique_id',
+                        name: 'unique_id'
                     },
                     {
                         data: 'name',
