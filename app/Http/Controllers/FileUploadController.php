@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\File;
 class FileUploadController extends Controller
 {
 
@@ -38,10 +39,18 @@ public function storeFiles(Request $request)
             $add = new FileUploadModel;
             $add->name = $file->getClientOriginalName(); 
             $add->org_code = auth()->user()->organisation_code;
-
             $uniqueId = $this->generateUniqueId($add->org_code);
-            $add->unique_id = $uniqueId;
 
+            $currentYear = now()->year;
+            $currentMonth = now()->month;
+
+            $publicPath = public_path("Organisation-Code/{$add->org_code}/{$currentYear}/{$currentMonth}");
+
+            if (!File::isDirectory($publicPath)) {
+                File::makeDirectory($publicPath, 0755, true);
+            }
+            $file->move($publicPath, $file->getClientOriginalName());
+            $add->unique_id = $uniqueId;
             $add->created_by = auth()->id();
             $add->updated_by = auth()->id();
             $add->created_at = now();
