@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="email" name="email" class="form-control" placeholder="Enter Email Address  :" autocomplete="off" style="margin-left:10px;width: 345px;" required >
+                                            <input type="text" name="email" class="form-control" placeholder="Enter Email Address  :" autocomplete="off" style="margin-left:10px;width: 345px;" required >
                                         </div>
                                     </div>
                                     

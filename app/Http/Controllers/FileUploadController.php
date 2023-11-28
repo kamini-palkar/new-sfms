@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Validator;
 class FileUploadController extends Controller
 {
 
-
-
-
     private function generateUniqueId($organisationCode)
     {
         $lastRecord = FileUploadModel::where('org_code', $organisationCode)
@@ -38,13 +35,12 @@ class FileUploadController extends Controller
 
     public function storeFiles(Request $request)
     {
-        
         $files = $request->file('name', []);
 
         $fileCount = count($files);
 
         if ($fileCount > 0) {
-           
+
             foreach ($files as $file) {
                 $add = new FileUploadModel;
                 $add->name = $file->getClientOriginalName();
@@ -66,21 +62,26 @@ class FileUploadController extends Controller
                 $add->updated_at = now();
                 $add->save();
             }
-            $url="http://files.seqr.info";
+            $url = "http://files.seqr.info";
 
             $regardsName = auth()->user()->name;
-            $id_for_mail =auth()->user()->organisation_id;
+            $id_for_mail = auth()->user()->organisation_id;
 
-             $organisation_name = DB::table('organisation_master')->where('id' , $id_for_mail)->get();
-             $nameForMail=$organisation_name[0]->name;
-        
+            $organisation_name = DB::table('organisation_master')->where('id', $id_for_mail)->get();
+            $nameForMail = $organisation_name[0]->name;
+
             $email = $request->input('email');
-            $data["title"] = "$nameForMail Sent You Files";
-            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for Details.";
-            $data["regardsName"] =$regardsName;
 
-            Mail::send('demoMail', $data, function ($message) use ($data, $email , $regardsName) {
-                $message->to($email, $email)
+            $emails = explode(',', $email);
+            $validatedEmails = array_map('trim', $emails);
+            $validatedEmails = array_filter($validatedEmails, 'filter_var', FILTER_VALIDATE_EMAIL);
+            
+            $data["title"] = "$nameForMail Sent You Files";
+            $data["body"] = "$fileCount Files have been uploaded. Please log in to the  $url for more Details.";
+            $data["regardsName"] = $regardsName;
+
+            Mail::send('demoMail', $data, function ($message) use ($data,  $validatedEmails, $regardsName) {
+                $message->to( $validatedEmails,  $validatedEmails)
                     ->subject($data["title"]);
 
             });
