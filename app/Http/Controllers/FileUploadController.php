@@ -12,7 +12,24 @@ class FileUploadController extends Controller
 {
 
 
-   
+
+
+    private function generateUniqueId($organisationCode)
+    {
+        $lastRecord = FileUploadModel::where('org_code', $organisationCode)
+            ->orderBy('id', 'desc')
+            ->first();
+    
+        if ($lastRecord) {
+            $lastUniqueId = intval(preg_replace('/[^0-9]/', '', $lastRecord->unique_id));
+            $newUniqueId = $organisationCode . '_' . ($lastUniqueId + 1);
+        } else {
+            $newUniqueId = $organisationCode . '_1';
+        }
+    
+        return $newUniqueId;
+    }
+    
 public function storeFiles(Request $request)
 {
     $files = $request->file('name' , []);
@@ -21,6 +38,10 @@ public function storeFiles(Request $request)
             $add = new FileUploadModel;
             $add->name = $file->getClientOriginalName(); 
             $add->org_code = auth()->user()->organisation_code;
+
+            $uniqueId = $this->generateUniqueId($add->org_code);
+            $add->unique_id = $uniqueId;
+
             $add->created_by = auth()->id();
             $add->updated_by = auth()->id();
             $add->created_at = now();

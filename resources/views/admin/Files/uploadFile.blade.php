@@ -92,6 +92,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    
                                     <br>
                                     <div style="float:right;">
 
@@ -103,8 +105,6 @@
                                             <button type="submit" id="submit" data-kt-contacts-type="submit"
                                                 class="btn btn-primary">
                                                 <span class="indicator-label">Save</span>
-
-
                                             </button>
                                         </div>
 
@@ -147,8 +147,6 @@
             
             var fileInputs = $('input[type="file"]');
             var atLeastOneFileSelected = false;
-
-           
             var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif' , 'xlsx']; 
 
             fileInputs.each(function() {
