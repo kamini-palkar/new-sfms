@@ -145,7 +145,7 @@
                         orderable: true,
                         searchable: true,
 
-                    }
+                    },
                 ],
                 order: [
                   [0, 'desc'] 

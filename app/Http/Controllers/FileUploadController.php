@@ -35,7 +35,7 @@ class FileUploadController extends Controller
 
     public function storeFiles(Request $request)
     {
-        $RecordUniqueId= time().'_'.mt_rand();
+        $RecordUniqueId = time() . '_' . mt_rand();
         $files = $request->file('name', []);
         $email = $request->input('email');
 
@@ -59,14 +59,14 @@ class FileUploadController extends Controller
                 }
                 $file->move($publicPath, $file->getClientOriginalName());
                 $add->unique_id = $uniqueId;
-                $add->record_unique_id=$RecordUniqueId;
+                $add->record_unique_id = $RecordUniqueId;
                 $add->created_by = auth()->id();
                 $add->updated_by = auth()->id();
                 $add->created_at = now();
                 $add->updated_at = now();
                 $add->save();
             }
-            $names = FileUploadModel::select('unique_id' , 'id' , 'name')->where('record_unique_id' , $RecordUniqueId)->get();
+            $names = FileUploadModel::select('unique_id', 'id', 'name')->where('record_unique_id', $RecordUniqueId)->get();
             $url = "http://files.seqr.info";
 
             $regardsName = auth()->user()->name;
@@ -76,19 +76,19 @@ class FileUploadController extends Controller
             $nameForMail = $organisation_name[0]->name;
 
             $email = $request->input('email');
-        
+
             $emails = explode(',', $email);
             $validatedEmails = array_map('trim', $emails);
             $validatedEmails = array_filter($validatedEmails, 'filter_var', FILTER_VALIDATE_EMAIL);
-            
+
             $data["title"] = "$nameForMail Sent You Files";
             $data["body"] = " You have received $fileCount Files . Please log in to the  $url to view sent files.";
             $data["regardsName"] = $regardsName;
             $data["filesForMail"] = $files;
-            $data["names"]=$names;
-        
-            Mail::send('demoMail', $data, function ($message) use ($data,  $validatedEmails, $regardsName) {
-                $message->to( $validatedEmails,  $validatedEmails)
+            $data["names"] = $names;
+
+            Mail::send('demoMail', $data, function ($message) use ($data, $validatedEmails, $regardsName) {
+                $message->to($validatedEmails, $validatedEmails)
                     ->subject($data["title"]);
 
             });
@@ -105,6 +105,7 @@ class FileUploadController extends Controller
     {
         $org_code = auth()->user()->organisation_code;
         $user_id = auth()->id();
+
         try {
             if ($request->ajax()) {
                 $showFile = FileUploadModel::select('*')
@@ -117,20 +118,23 @@ class FileUploadController extends Controller
                     ->addColumn('action', function ($row) {
 
                         $deleteUrl = route('delete-file', ['id' => $row->id]);
-
+                        $downloadUrl = route('download.file', ['id' => $row->id]);
+    
                         $actionBtn = '
-                 <a  href="' . $deleteUrl . '" title="Delete"   style="cursor: pointer;font-weight:normal !important;" class="menu-link flex-stack px-3"><i class="fa fa-trash" style="color:red"></i></a>';
+                        <a href="' . $deleteUrl . '" title="Delete" style="cursor: pointer;font-weight:normal !important;" class="menu-link flex-stack px-3"><i class="fa fa-trash" style="color:red"></i></a>
+                        <a href="' . $downloadUrl . '" title="Download" style="cursor: pointer;font-weight:normal !important;" class="menu-link flex-stack px-3"><i class="fa fa-download" style="color:blue"></i></a>'; // Add the download link
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
-
                     ->make(true);
             }
         } catch (Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }
+
         return view('admin.Files.showFile');
     }
+
 
 
 
@@ -152,5 +156,30 @@ class FileUploadController extends Controller
         Session::flash('message', 'File Deleted Successfully.!');
         return redirect('show-files');
     }
+
+
+
+
+
+    public function downloadFile($id)
+    {
+        $file = FileUploadModel::findOrFail($id);
+    
+        $orgCode = auth()->user()->organisation_code;
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+        $publicPath = public_path("Organisation/{$orgCode}/{$currentYear}/{$currentMonth}");
+    
+        $filePath = $publicPath . '/' . $file->name;
+    
+       
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $file->name);
+        } else {
+           
+            return response()->json(['error' => 'File not found'], 404);
+        }
+    }
+
 
 }

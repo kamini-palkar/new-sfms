@@ -84,7 +84,7 @@
                                                         class="form-control" autocomplete="off"
                                                         oninput="removeBorderStyle(this)">
 
-                                                    
+                                                        <span id="errorDiv" style="color:red;"></span>
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
@@ -102,7 +102,7 @@
                                     </div>
                               
                                     <br>
-                                    <span id="errorDiv" style="color:red;"></span>
+                                    <span id="errorDivOfSize" style="color:red;"></span>
                                     <div style="float:right;">
 
                                         <div class="d-flex justify-content-end">
@@ -208,7 +208,7 @@ $('#submit').on('click', function (e) {
 
                 if (files[i].size > maxFileSize) {
                     e.preventDefault();
-                    $('#errorDiv').text('File size of "' + fileName + '" exceeds the limit. It should be less than 2 MB.');
+                    $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than 2 MB.');
                     return;
                 }
             }
