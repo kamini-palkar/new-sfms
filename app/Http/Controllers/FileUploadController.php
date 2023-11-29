@@ -37,6 +37,7 @@ class FileUploadController extends Controller
     {
         $RecordUniqueId= time().'_'.mt_rand();
         $files = $request->file('name', []);
+        $email = $request->input('email');
 
         $fileCount = count($files);
 
@@ -45,6 +46,7 @@ class FileUploadController extends Controller
             foreach ($files as $file) {
                 $add = new FileUploadModel;
                 $add->name = $file->getClientOriginalName();
+                $add->email = $email;
                 $add->org_code = auth()->user()->organisation_code;
                 $uniqueId = $this->generateUniqueId($add->org_code);
                 $currentYear = now()->year;
@@ -64,11 +66,7 @@ class FileUploadController extends Controller
                 $add->updated_at = now();
                 $add->save();
             }
-
-
-
             $names = FileUploadModel::select('unique_id' , 'id' , 'name')->where('record_unique_id' , $RecordUniqueId)->get();
-           
             $url = "http://files.seqr.info";
 
             $regardsName = auth()->user()->name;
@@ -78,7 +76,7 @@ class FileUploadController extends Controller
             $nameForMail = $organisation_name[0]->name;
 
             $email = $request->input('email');
-
+        
             $emails = explode(',', $email);
             $validatedEmails = array_map('trim', $emails);
             $validatedEmails = array_filter($validatedEmails, 'filter_var', FILTER_VALIDATE_EMAIL);
@@ -88,8 +86,7 @@ class FileUploadController extends Controller
             $data["regardsName"] = $regardsName;
             $data["filesForMail"] = $files;
             $data["names"]=$names;
-         
-
+        
             Mail::send('demoMail', $data, function ($message) use ($data,  $validatedEmails, $regardsName) {
                 $message->to( $validatedEmails,  $validatedEmails)
                     ->subject($data["title"]);
