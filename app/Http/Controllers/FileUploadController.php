@@ -35,6 +35,7 @@ class FileUploadController extends Controller
 
     public function storeFiles(Request $request)
     {
+        $RecordUniqueId= time().'_'.mt_rand();
         $files = $request->file('name', []);
 
         $fileCount = count($files);
@@ -56,12 +57,18 @@ class FileUploadController extends Controller
                 }
                 $file->move($publicPath, $file->getClientOriginalName());
                 $add->unique_id = $uniqueId;
+                $add->record_unique_id=$RecordUniqueId;
                 $add->created_by = auth()->id();
                 $add->updated_by = auth()->id();
                 $add->created_at = now();
                 $add->updated_at = now();
                 $add->save();
             }
+
+
+
+            $names = FileUploadModel::select('unique_id' , 'id' , 'name')->where('record_unique_id' , $RecordUniqueId)->get();
+           
             $url = "http://files.seqr.info";
 
             $regardsName = auth()->user()->name;
@@ -80,7 +87,8 @@ class FileUploadController extends Controller
             $data["body"] = " You have received $fileCount Files . Please log in to the  $url to view sent files.";
             $data["regardsName"] = $regardsName;
             $data["filesForMail"] = $files;
-
+            $data["names"]=$names;
+         
 
             Mail::send('demoMail', $data, function ($message) use ($data,  $validatedEmails, $regardsName) {
                 $message->to( $validatedEmails,  $validatedEmails)

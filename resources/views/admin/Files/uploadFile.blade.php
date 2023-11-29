@@ -84,7 +84,7 @@
                                                         class="form-control" autocomplete="off"
                                                         oninput="removeBorderStyle(this)">
 
-                                                    <span id="errorDiv" style="color:red;"></span>
+                                                    
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
@@ -100,8 +100,9 @@
                                                 style="margin-left:10px;width: 345px;" required>
                                         </div>
                                     </div>
-
+                              
                                     <br>
+                                    <span id="errorDiv" style="color:red;"></span>
                                     <div style="float:right;">
 
                                         <div class="d-flex justify-content-end">
@@ -124,7 +125,7 @@
                         </div>
                         </div>
                         <div class="marquee-container" style="width:100%">
-                                <div class="marquee-content" style="padding-top:20px; color:red">
+                                <div class="marquee-content" style="padding-top:20px; color:green">
                                    
                                     Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span>   You can upload maximum 10 files  and multiple emails at a Time.</span> 
                                 </div>
@@ -179,44 +180,47 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
+   $(document).ready(function () {
 
-        $('#submit').on('click', function(e) {
+$('#submit').on('click', function (e) {
 
-            var fileInputs = $('input[type="file"]');
-            var atLeastOneFileSelected = false;
-            var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx'];
+    var fileInputs = $('input[type="file"]');
+    var atLeastOneFileSelected = false;
+    var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
+    var maxFileSize = 2 * 1024 * 1024; // 2 MB
 
-            fileInputs.each(function() {
-                var files = $(this).get(0).files;
-                if (files.length > 0) {
-                    atLeastOneFileSelected = true;
+    fileInputs.each(function () {
+        var files = $(this).get(0).files;
+        if (files.length > 0) {
+            atLeastOneFileSelected = true;
 
-                    for (var i = 0; i < files.length; i++) {
-                        var fileName = files[i].name;
-                        var fileExtension = fileName.split('.').pop().toLowerCase();
+            for (var i = 0; i < files.length; i++) {
+                var fileName = files[i].name;
+                var fileExtension = fileName.split('.').pop().toLowerCase();
 
-                        if (allowedExtensions.indexOf(fileExtension) === -1) {
-
-                            e.preventDefault();
-                            $('#errorDiv').text(
-                                'Please select a valid file type (jpg, jpeg, png, gif , xlsx).'
-                                );
-                            return;
-                        }
-                    }
-                    $('#errorDiv').text('');
-                    return false;
+                if (allowedExtensions.indexOf(fileExtension) === -1) {
+                    e.preventDefault();
+                    $('#errorDiv').text(
+                        'Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).'
+                    );
+                    return;
                 }
-            });
 
-
-            if (!atLeastOneFileSelected) {
-                e.preventDefault();
-                $('#errorDiv').text('Please select at least one file.');
+                if (files[i].size > maxFileSize) {
+                    e.preventDefault();
+                    $('#errorDiv').text('File size of "' + fileName + '" exceeds the limit. It should be less than 2 MB.');
+                    return;
+                }
             }
-        });
+        }
     });
+
+    if (!atLeastOneFileSelected) {
+        e.preventDefault();
+        $('#errorDiv').text('Please select at least one file.');
+    }
+});
+});
     </script>
     <script type="text/javascript">
     $(document).ready(function() {
