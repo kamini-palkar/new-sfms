@@ -71,5 +71,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('/delete-file/{id}', [App\Http\Controllers\FileUploadController::class, 'destroyFile'])->name('delete-file');
 
+    
 });
 ?>

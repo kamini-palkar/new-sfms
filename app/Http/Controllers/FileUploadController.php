@@ -109,7 +109,7 @@ class FileUploadController extends Controller
         try {
             if ($request->ajax()) {
                 $showFile = FileUploadModel::select('*')
-                    ->where('created_by', $user_id)
+                    // ->where('created_by', $user_id)
                     ->where('org_code', $org_code)
                     ->get();
 
@@ -134,10 +134,6 @@ class FileUploadController extends Controller
 
         return view('admin.Files.showFile');
     }
-
-
-
-
     public function destroyFile($id)
     {
 
@@ -156,10 +152,6 @@ class FileUploadController extends Controller
         Session::flash('message', 'File Deleted Successfully.!');
         return redirect('show-files');
     }
-
-
-
-
 
     public function downloadFile($id)
     {

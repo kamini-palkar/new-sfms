@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="card-body pt-5">
-                                <form method="POST" id="form" action="">
+                                <form method="POST" id="form" action="{{route('create-user')}}">
                                     @csrf
 
                                     <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
@@ -79,7 +79,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">ORGANISATION</span>
+                                                    <span class="">ORGANISATION</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
 
                                                 <select name="organisation_id" id="organisation_id"
@@ -115,7 +116,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">NAME</span>
+                                                    <span class="">NAME</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
                                                 <input type="text" name="name" id="name"
                                                     class="form-control form-control-solids" value="{{old('name')}}"
@@ -132,7 +134,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">USERNAME</span>
+                                                    <span class="">USERNAME</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
                                                 <input type="text" name="username" id="username"
                                                     class="form-control form-control-solids" value="{{old('username')}}"
@@ -148,7 +151,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">PASSWORD</span>
+                                                    <span class="">PASSWORD</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
                                                 <input type="text" name="password" id="password"
                                                     class="form-control form-control-solids" aria-required="true"

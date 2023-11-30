@@ -83,7 +83,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">ORG Name</span>
+                                                    <span class="">ORG Name</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
                                                 <input type="text" name="name" id="organisation_name"
                                                     class="form-control form-control-solids"
@@ -103,7 +104,8 @@
                                         <div class="col">
                                             <div class="fv-row mb-2">
                                                 <label class="fs-6 fw-bold form-label mt-3">
-                                                    <span class="">ORG Code</span>
+                                                    <span class="">ORG Code</span><span
+                                                            style="color: red;">*</span>
                                                 </label>
                                                 <input type="text" name="code" id="organisation_code"
                                                     class="form-control form-control-solids"

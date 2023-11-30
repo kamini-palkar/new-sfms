@@ -2,7 +2,6 @@
 
 @section('containes')
 
-
 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 </div>
 </div>
@@ -81,14 +80,12 @@
 
                                                     </label>
                                                     <input type="file" name="name[]" id="organisation_code"
-                                                        class="form-control" autocomplete="off"
-                                                        oninput="removeBorderStyle(this)">
+                                                        class="form-control" autocomplete="off">
 
-                                                        <span id="errorDiv" style="color:red;"></span>
+                                                    <span id="errorDiv" style="color:red;"></span>
                                                     <a href="javascript:void(0);" class="add_button" title="Add"><img
                                                             src="/images/plus.png"
                                                             style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +97,7 @@
                                                 style="margin-left:10px;width: 345px;" required>
                                         </div>
                                     </div>
-                              
+
                                     <br>
                                     <span id="errorDivOfSize" style="color:red;"></span>
                                     <div style="float:right;">
@@ -123,127 +120,135 @@
                             </div>
 
                         </div>
+                    </div>
+                    <div class="marquee-container" style="width:100%">
+                        <div class="marquee-content" style="padding-top:20px; color:green">
+
+                            Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span> You can
+                                upload maximum 10 files and multiple emails at a Time.</span>
                         </div>
-                        <div class="marquee-container" style="width:100%">
-                                <div class="marquee-content" style="padding-top:20px; color:green">
-                                   
-                                    Note<span style="padding-left:8px;"> <span style="padding-right:4px;">:</span>   You can upload maximum 10 files  and multiple emails at a Time.</span> 
-                                </div>
-                            </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     </div>
     </div>
     </div>
     </div>
     </div>
-
-
     <style>
-    #organisation_code-error {
-        color: red;
-        padding-top: 15px;
+        #organisation_code-error {
+            color: red;
+            padding-top: 15px;
 
-    }
-
-    #Errormsg {
-        color: red;
-        margin-top: 10px;
-
-    }
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(100%);
         }
 
-        100% {
-            transform: translateX(-100%);
+        #Errormsg {
+            color: red;
+            margin-top: 10px;
+
         }
-    }
 
-    .marquee-container {
-        overflow: hidden;
-        white-space: nowrap;
-        width:100%;
-    }
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
 
-    .marquee-content {
-        display: inline-block;
-        width:100%;
-        animation: marquee 20s linear infinite;
-    }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            width: 100%;
+            animation: marquee 20s linear infinite;
+        }
     </style>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script type="text/javascript">
-   $(document).ready(function () {
+        $(document).ready(function () {
+            $('#submit').on('click', function (e) {
+                var fileInputs = $('input[type="file"]');
+                var atLeastOneFileSelected = false;
+                var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
+                var maxFileSizeBytes = 200 * 1024 * 1024; // 200 MB
+                console.log('max size');
+                console.log(maxFileSizeBytes);
 
-$('#submit').on('click', function (e) {
+                fileInputs.each(function () {
+                    console.log('hello');
+                    var files = $(this).get(0).files;
+                    if (files.length > 0) {
+                        console.log('actual size');
+                        console.log(files.length);
+                        atLeastOneFileSelected = true;
 
-    var fileInputs = $('input[type="file"]');
-    var atLeastOneFileSelected = false;
-    var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
-    var maxFileSize = 2 * 1024 * 1024; // 2 MB
+                        for (var i = 0; i < files.length; i++) {
+                            var fileName = files[i].name;
+                            var fileExtension = fileName.split('.').pop().toLowerCase();
 
-    fileInputs.each(function () {
-        var files = $(this).get(0).files;
-        if (files.length > 0) {
-            atLeastOneFileSelected = true;
+                            if (allowedExtensions.indexOf(fileExtension) === -1) {
+                                e.preventDefault();
+                                console.log('coming');
+                                $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).');
+                                return;
+                            }
 
-            for (var i = 0; i < files.length; i++) {
-                var fileName = files[i].name;
-                var fileExtension = fileName.split('.').pop().toLowerCase();
+                            var fileSizeBytes = files[i].size;
+                            console.log('File size in bytes: ' + fileSizeBytes);
 
-                if (allowedExtensions.indexOf(fileExtension) === -1) {
+                            if (fileSizeBytes > maxFileSizeBytes) {
+                                console.log('File size exceeds the limit');
+                                e.preventDefault();
+                                $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than 200 MB.');
+                                return;
+                            } else {
+                                console.log('File size is acceptable');
+                            }
+                        }
+                  
+                    }
+                if (!atLeastOneFileSelected) {
                     e.preventDefault();
-                    $('#errorDiv').text(
-                        'Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).'
-                    );
-                    return;
+                    $('#errorDiv').text('Please select at least one file.');
                 }
-
-                if (files[i].size > maxFileSize) {
-                    e.preventDefault();
-                    $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than 2 MB.');
-                    return;
-                }
-            }
-        }
+            });
+        });
+   
     });
-
-    if (!atLeastOneFileSelected) {
-        e.preventDefault();
-        $('#errorDiv').text('Please select at least one file.');
-    }
-});
-});
     </script>
     <script type="text/javascript">
-    $(document).ready(function() {
-        var maxField = 10;
-        var addButton = $('.add_button');
-        var wrapper = $('.field_wrapper');
-        var fieldHTML =
-            '<div class="field_wrapper"><input type="file"  class="form-control"   name="name[]" value=""/ style="margin-left:13px;width:345px;"><a href="javascript:void(0);" class="remove_button"><img src="/images/minus.png"/  style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -56px;margin-left: 385px;"></a></div>';
-        var x = 1;
+        $(document).ready(function () {
+            var maxField = 10;
+            var addButton = $('.add_button');
+            var wrapper = $('.field_wrapper');
+            var fieldHTML =
+                '<div class="field_wrapper"><input type="file"  class="form-control"   name="name[]" value=""/ style="margin-left:13px;width:345px;"><a href="javascript:void(0);" class="remove_button"><img src="/images/minus.png"/  style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -56px;margin-left: 385px;"></a></div>';
+            var x = 1;
 
-        //Once add button is clicked
-        $(addButton).click(function() {
+            //Once add button is clicked
+            $(addButton).click(function () {
 
-            if (x < maxField) {
-                x++;
-                $(wrapper).append(fieldHTML);
-            }
+                if (x < maxField) {
+                    x++;
+                    $(wrapper).append(fieldHTML);
+                }
+            });
+            $(wrapper).on('click', '.remove_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove();
+                x--;
+            });
         });
-        $(wrapper).on('click', '.remove_button', function(e) {
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        });
-    });
     </script>
     @endsection

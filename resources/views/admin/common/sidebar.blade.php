@@ -4,12 +4,19 @@
         data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
             <a>
-
-
-                <img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;" />
-
+                <img alt="Logo" src="assets/media/avatars/sfms.PNG" class="h-30px" style="padding-left:40px;"
+                    onerror="replaceImageWithText(this, 'SFMS')" />
             </a>
 
+            <script>
+    function replaceImageWithText(img, text) {
+        img.style.display = 'none';
+        img.onerror = null; 
+        img.src = ''; 
+        img.alt = text; 
+        
+    }
+</script>
             <div id="kt_app_sidebar_toggle"
                 class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
                 data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
@@ -87,6 +94,6 @@
                                     <span class="menu-title">UPLOAD FILES</span>
                                 </a>
                             </div>
-                           
+
                         </div>
                     </div>
