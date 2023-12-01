@@ -95,6 +95,7 @@
                                                  required>
                                         </div>
                                     </div>
+                                    <span id="errorDivOfSize" style="color:red;"></span>
                                     <div style="float:right;">
 
                                         <div class="d-flex justify-content-end">
