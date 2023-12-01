@@ -71,6 +71,7 @@
                                         <div class="row field_wrapper ">
                                             <label class="fs-6 fw-bold form-label mt-3">
                                                             <span class="">FILE UPLOAD</span>
+                                                            <span style="color:red;">*</span>
 
                                             </label>
                                             <div class="col-8 col-sm-8 col-md-6 col-ls-6 mb-3">
@@ -209,7 +210,9 @@
                     }
                 }
             }else{
+                e.preventDefault();
                 $('#errorDiv').text('Please select file.');
+                return;
             }
         });
 
