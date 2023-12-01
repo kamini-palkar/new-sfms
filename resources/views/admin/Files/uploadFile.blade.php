@@ -66,38 +66,35 @@
                                 <form method="POST" id="form" action="{{route('upload-file')}}"
                                     enctype="multipart/form-data">
                                     @csrf
+                                     <div class="div_append">
+                                        <div class="row field_wrapper ">
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                            <span class="">FILE UPLOAD</span><span
+                                                                style="color: red;">*</span>
 
-                                    <div class="row row-cols-1 row-cols-sm-3 rol-cols-md-1 row-cols-lg-3">
+                                            </label>
+                                            <div class="col-8 col-sm-8 col-md-6 col-ls-6 mb-3">
+                                                <input type="file" name="name[]" id="organisation_code"
+                                                            class="form-control" autocomplete="off">
 
-                                        <div class="field_wrapper">
-                                            <div class="col">
-                                                <div class="fv-row mb-2">
-                                                    <label class="fs-6 fw-bold form-label mt-3">
-                                                        <span class="">FILE UPLOAD</span><span
-                                                            style="color: red;">*</span>
-
-                                                    </label>
-                                                    <input type="file" name="name[]" id="organisation_code"
-                                                        class="form-control" autocomplete="off">
-
-                                                    <span id="errorDiv" style="color:red;"></span>
-                                                    <a href="javascript:void(0);" class="add_button" title="Add"><img
-                                                            src="/images/plus.png"
-                                                            style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -26px;margin-left: 370px;"></a>
-                                                </div>
+                                                <span id="errorDiv" style="color:red;"></span>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="text" name="email" class="form-control"
-                                                placeholder="Enter Email Address  :" autocomplete="off"
-                                                style="margin-left:10px;width: 345px;" required>
-                                        </div>
-                                    </div>
 
-                                    <br>
-                                    <span id="errorDivOfSize" style="color:red;"></span>
+                                            <div class="col-4 col-sm-4 col-md-4 col-ls-4">
+                                                <a href="javascript:void(0);" class="add_button" title="Add"><img
+                                                                src="/images/plus.png"
+                                                                style="height:30px; width:30px;padding-top: 0px;"></a>
+                                            </div>
+
+                                        </div>
+                                     </div>
+                                    <div class="row">
+                                        <div class="col-8 col-sm-8 col-md-6 col-ls-6 mb-3" >
+                                        <input type="text" name="email" class="form-control"
+                                                placeholder="Enter Email Address  :" autocomplete="off"
+                                                 required>
+                                        </div>
+                                    </div>
                                     <div style="float:right;">
 
                                         <div class="d-flex justify-content-end">
@@ -113,7 +110,7 @@
                                             </button>
                                         </div>
 
-                                    </div>
+                                   
                                 </form>
                             </div>
 
@@ -222,9 +219,10 @@
         $(document).ready(function () {
             var maxField = 10;
             var addButton = $('.add_button');
-            var wrapper = $('.field_wrapper');
-            var fieldHTML =
-                '<div class="field_wrapper"><input type="file"  class="form-control"   name="name[]" value=""/ style="margin-left:13px;width:345px;"><a href="javascript:void(0);" class="remove_button"><img src="/images/minus.png"/  style="height:30px; width:30px;padding-top: 0px;padding-right: 1px;padding-bottom: 3px;padding-left: -13px;margin-top: -55px;margin-right: -56px;margin-left: 385px;"></a></div>';
+            var wrapper = $('.div_append');
+    
+
+            var fieldHTML ='<div class="row field_wrapper new-field_wrapper"> <div class="col-8 col-sm-8 col-md-6 col-ls-6 mb-3"><input type="file"  class="form-control "   name="name[]" value=""/ > </div> <div class="col-4 col-sm-4 col-md-4 col-ls-4"> <a href="javascript:void(0);" class="remove_button" title="Add"><img src="/images/minus.png"/ style="height:30px; width:30px;"></a></div> </div>';
             var x = 1;
 
             //Once add button is clicked
@@ -237,9 +235,12 @@
             });
             $(wrapper).on('click', '.remove_button', function (e) {
                 e.preventDefault();
-                $(this).parent('div').remove();
+                // alert(1);
+                $(this).closest('.new-field_wrapper').remove();
                 x--;
             });
         });
     </script>
     @endsection
+
+
