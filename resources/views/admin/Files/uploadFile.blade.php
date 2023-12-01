@@ -77,7 +77,7 @@
                                                 <input type="file" name="name[]" id="organisation_code"
                                                             class="form-control" autocomplete="off">
 
-                                                <span id="errorDivOFRequired" style="color:red;"></span>
+                                              
                                             </div>
 
                                             <div class="col-4 col-sm-4 col-md-4 col-ls-4">
@@ -95,9 +95,7 @@
                                                  required>
                                         </div>
                                     </div>
-                                    <span id="errorDivOfSize" style="color:red;"></span>
-                                    <span id="errorDivofValid" style="color:red;"></span>
-
+                                    <span id="errorDiv" style="color:red;"></span>
                                     
                                     <div style="float:right;">
 
@@ -175,23 +173,28 @@
     <script type="text/javascript">
       $(document).ready(function () {
     $('#submit').on('click', function (e) {
+         $('#errorDiv').text('');
         var fileInputs = $('input[type="file"]');
+        
         var atLeastOneFileSelected = false;
         var allowedExtensions = ['jpg', 'jpeg', 'png', 'xlsx', 'doc' , 'docx' , 'pdf' , 'xls' ,'zip'];
-        var maxFileSizeMB = 200; // 200 MB
-
+        var maxFileSizeMB = 20; // 200 MB
+        var renderCount = 0;
+        
         fileInputs.each(function () {
             var files = $(this).get(0).files;
+            // console.log(files)
             if (files.length > 0) {
                 atLeastOneFileSelected = true;
 
                 for (var i = 0; i < files.length; i++) {
                     var fileName = files[i].name;
                     var fileExtension = fileName.split('.').pop().toLowerCase();
-
+                    // console.log(files[i].size ,fileName)
+                    
                     if (allowedExtensions.indexOf(fileExtension) === -1) {
                         e.preventDefault();
-                        $('#errorDivofValid').text('Please select a valid file type (jpg, jpeg, png, xlsx, doc , docx , pdf ,xls ,zip).');
+                        $('#errorDiv').text('Please select a ('+ fileName +') valid file type (jpg, jpeg, png, xlsx, doc , docx , pdf ,xls ,zip).');
                         return;
                     }
 
@@ -201,16 +204,18 @@
 
                     if (fileSizeMB > maxFileSizeMB) {
                         e.preventDefault();
-                        $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than ' + maxFileSizeMB + ' MB.');
+                        $('#errorDiv').text('File size of "' + fileName + '" exceeds the limit. It should be less than ' + maxFileSizeMB + ' MB.');
                         return;
                     }
                 }
+            }else{
+                $('#errorDiv').text('Please select file.');
             }
         });
 
         if (!atLeastOneFileSelected) {
             e.preventDefault();
-            $('#errorDivOFRequired').text('Please select at least one file.');
+            $('#errorDiv').text('Please select file.');
         }
     });
 });
@@ -231,6 +236,7 @@
             $(addButton).click(function () {
 
                 if (x < maxField) {
+                  
                     x++;
                     $(wrapper).append(fieldHTML);
                 }
