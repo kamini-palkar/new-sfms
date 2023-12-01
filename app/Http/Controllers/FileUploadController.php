@@ -62,8 +62,9 @@ class FileUploadController extends Controller
                 $add->record_unique_id = $RecordUniqueId;
                 $add->created_by = auth()->id();
                 $add->updated_by = auth()->id();
+                $add->added_by = auth()->user()->name;
                 $add->created_at = now();
-                $add->updated_at = now();
+                
                 $add->save();
             }
             $names = FileUploadModel::select('unique_id', 'id', 'name')->where('record_unique_id', $RecordUniqueId)->get();
@@ -106,6 +107,9 @@ class FileUploadController extends Controller
         $org_code = auth()->user()->organisation_code;
         $user_id = auth()->id();
 
+        $Created_by_name = auth()->user()->name;
+        
+
         try {
             if ($request->ajax()) {
                 $showFile = FileUploadModel::select('*')
@@ -132,7 +136,7 @@ class FileUploadController extends Controller
             return back()->withError($exception->getMessage())->withInput();
         }
 
-        return view('admin.Files.showFile');
+        return view('admin.Files.showFile' , ['Created_by_name' , $Created_by_name]);
     }
     public function destroyFile($id)
     {

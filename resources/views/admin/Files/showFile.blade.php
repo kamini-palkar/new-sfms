@@ -1,6 +1,9 @@
 @extends('admin.common.main')
 @section('containes')
 
+
+
+
 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 </div>
 </div>
@@ -90,6 +93,9 @@
                                     <th id="th">SR NO</th>
                                     <th id="th">UNIQUE ID</th>
                                     <th id="th">FILE NAME</th>
+                                    <th id="th">BY</th>
+                                    <th id="th">ON</th>
+                                    <th id="th">SIZE</th>
                                     <th id="th">ORGANISATION CODE</th>
                                     <th id="th">ACTION</th>
                                 </tr>
@@ -129,6 +135,18 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'added_by',
+                        name: 'added_by'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'size',
+                        name: 'size'
                     },
                     {
                         data: 'org_code',

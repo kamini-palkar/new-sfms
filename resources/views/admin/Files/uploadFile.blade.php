@@ -48,6 +48,7 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             &nbsp;
                             <span>Upload Files</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -69,8 +70,7 @@
                                      <div class="div_append">
                                         <div class="row field_wrapper ">
                                             <label class="fs-6 fw-bold form-label mt-3">
-                                                            <span class="">FILE UPLOAD</span><span
-                                                                style="color: red;">*</span>
+                                                            <span class="">FILE UPLOAD</span>
 
                                             </label>
                                             <div class="col-8 col-sm-8 col-md-6 col-ls-6 mb-3">
@@ -106,8 +106,6 @@
                                             <button type="submit" id="submit" data-kt-contacts-type="submit"
                                                 class="btn btn-primary">
                                                 <span class="indicator-label">Save</span>
-
-
                                             </button>
                                         </div>
 
@@ -176,7 +174,7 @@
     $('#submit').on('click', function (e) {
         var fileInputs = $('input[type="file"]');
         var atLeastOneFileSelected = false;
-        var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
+        var allowedExtensions = ['jpg', 'jpeg', 'png', 'xlsx', 'doc' , 'docx' , 'pdf' , 'xls' ,'zip'];
         var maxFileSizeMB = 200; // 200 MB
 
         fileInputs.each(function () {
@@ -190,7 +188,7 @@
 
                     if (allowedExtensions.indexOf(fileExtension) === -1) {
                         e.preventDefault();
-                        $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).');
+                        $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, xlsx, doc , docx , pdf ,xls ,zip).');
                         return;
                     }
 
