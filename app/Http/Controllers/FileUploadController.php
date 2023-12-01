@@ -63,8 +63,7 @@ class FileUploadController extends Controller
                 $add->created_by = auth()->id();
                 $add->updated_by = auth()->id();
                 $add->added_by = auth()->user()->name;
-                $add->created_at = now();
-                
+                $add->created_at = now()->format('Y-m-d H:i');
                 $add->save();
             }
             $names = FileUploadModel::select('unique_id', 'id', 'name')->where('record_unique_id', $RecordUniqueId)->get();

@@ -142,8 +142,21 @@
                     },
                     {
                         data: 'created_at',
-                        name: 'created_at'
+                        name: 'created_at',
+                        render: function(data, type, full, meta) {
+                  
+                    if (data) {
+                     
+                        
+                        var formattedDate = moment(data).format('YYYY-MM-DD h:mm A');
+                        return formattedDate;
+                    } else {
+                        return ''; 
+                    }
+                }
                     },
+                    
+                    
                     {
                         data: 'size',
                         name: 'size'
