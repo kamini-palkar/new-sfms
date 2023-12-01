@@ -57,6 +57,17 @@ class FileUploadController extends Controller
                 if (!File::isDirectory($publicPath)) {
                     File::makeDirectory($publicPath, 0755, true);
                 }
+
+                $fileSize = $file->getSize();
+
+
+                if ($fileSize >= 1048576) { 
+                    $fileSizeFormatted = number_format($fileSize / 1048576, 2) . ' MB';
+                } else {
+                    $fileSizeFormatted = number_format($fileSize / 1024, 2) . ' KB';
+                }
+                $add->size = $fileSizeFormatted;
+                
                 $file->move($publicPath, $file->getClientOriginalName());
                 $add->unique_id = $uniqueId;
                 $add->record_unique_id = $RecordUniqueId;

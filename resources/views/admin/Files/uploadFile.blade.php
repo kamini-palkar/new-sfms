@@ -77,7 +77,7 @@
                                                 <input type="file" name="name[]" id="organisation_code"
                                                             class="form-control" autocomplete="off">
 
-                                                <span id="errorDiv" style="color:red;"></span>
+                                                <span id="errorDivOFRequired" style="color:red;"></span>
                                             </div>
 
                                             <div class="col-4 col-sm-4 col-md-4 col-ls-4">
@@ -96,6 +96,9 @@
                                         </div>
                                     </div>
                                     <span id="errorDivOfSize" style="color:red;"></span>
+                                    <span id="errorDivofValid" style="color:red;"></span>
+
+                                    
                                     <div style="float:right;">
 
                                         <div class="d-flex justify-content-end">
@@ -188,7 +191,7 @@
 
                     if (allowedExtensions.indexOf(fileExtension) === -1) {
                         e.preventDefault();
-                        $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, xlsx, doc , docx , pdf ,xls ,zip).');
+                        $('#errorDivofValid').text('Please select a valid file type (jpg, jpeg, png, xlsx, doc , docx , pdf ,xls ,zip).');
                         return;
                     }
 
@@ -207,7 +210,7 @@
 
         if (!atLeastOneFileSelected) {
             e.preventDefault();
-            $('#errorDiv').text('Please select at least one file.');
+            $('#errorDivOFRequired').text('Please select at least one file.');
         }
     });
 });
