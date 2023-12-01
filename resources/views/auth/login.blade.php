@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('SFMS LOGIN') }}</div>
-
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

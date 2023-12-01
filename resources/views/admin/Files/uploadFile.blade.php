@@ -60,10 +60,8 @@
 
                                 <div style="display:none" class="card-title">
 
-
                                 </div>
                             </div>
-
                             <div class="card-body pt-5">
                                 <form method="POST" id="form" action="{{route('upload-file')}}"
                                     enctype="multipart/form-data">
@@ -176,56 +174,49 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#submit').on('click', function (e) {
-                var fileInputs = $('input[type="file"]');
-                var atLeastOneFileSelected = false;
-                var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
-                var maxFileSizeBytes = 200 * 1024 * 1024; // 200 MB
-                console.log('max size');
-                console.log(maxFileSizeBytes);
+      $(document).ready(function () {
+    $('#submit').on('click', function (e) {
+        var fileInputs = $('input[type="file"]');
+        var atLeastOneFileSelected = false;
+        var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'xlsx', 'exe'];
+        var maxFileSizeMB = 200; // 200 MB
 
-                fileInputs.each(function () {
-                    console.log('hello');
-                    var files = $(this).get(0).files;
-                    if (files.length > 0) {
-                        console.log('actual size');
-                        console.log(files.length);
-                        atLeastOneFileSelected = true;
+        fileInputs.each(function () {
+            var files = $(this).get(0).files;
+            if (files.length > 0) {
+                atLeastOneFileSelected = true;
 
-                        for (var i = 0; i < files.length; i++) {
-                            var fileName = files[i].name;
-                            var fileExtension = fileName.split('.').pop().toLowerCase();
+                for (var i = 0; i < files.length; i++) {
+                    var fileName = files[i].name;
+                    var fileExtension = fileName.split('.').pop().toLowerCase();
 
-                            if (allowedExtensions.indexOf(fileExtension) === -1) {
-                                e.preventDefault();
-                                console.log('coming');
-                                $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).');
-                                return;
-                            }
-
-                            var fileSizeBytes = files[i].size;
-                            console.log('File size in bytes: ' + fileSizeBytes);
-
-                            if (fileSizeBytes > maxFileSizeBytes) {
-                                console.log('File size exceeds the limit');
-                                e.preventDefault();
-                                $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than 200 MB.');
-                                return;
-                            } else {
-                                console.log('File size is acceptable');
-                            }
-                        }
-                  
+                    if (allowedExtensions.indexOf(fileExtension) === -1) {
+                        e.preventDefault();
+                        $('#errorDiv').text('Please select a valid file type (jpg, jpeg, png, gif, xlsx, exe).');
+                        return;
                     }
-                if (!atLeastOneFileSelected) {
-                    e.preventDefault();
-                    $('#errorDiv').text('Please select at least one file.');
+
+                    var fileSizeMB = files[i].size / (1024 * 1024);
+
+                    console.log('File size of "' + fileName + '" in MB: ' + fileSizeMB.toFixed(2)); 
+
+                    if (fileSizeMB > maxFileSizeMB) {
+                        e.preventDefault();
+                        $('#errorDivOfSize').text('File size of "' + fileName + '" exceeds the limit. It should be less than ' + maxFileSizeMB + ' MB.');
+                        return;
+                    }
                 }
-            });
+            }
         });
-   
+
+        if (!atLeastOneFileSelected) {
+            e.preventDefault();
+            $('#errorDiv').text('Please select at least one file.');
+        }
     });
+});
+
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {

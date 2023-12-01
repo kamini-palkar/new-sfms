@@ -118,7 +118,7 @@ class FileUploadController extends Controller
                     ->addColumn('action', function ($row) {
 
                         $deleteUrl = route('delete-file', ['id' => $row->id]);
-                        $downloadUrl = route('download.file', ['id' => $row->id]);
+                        $downloadUrl = route('download.file', ['id' =>encrypt($row->id)]);
     
                         $actionBtn = '
                         <a href="' . $deleteUrl . '" title="Delete" style="cursor: pointer;font-weight:normal !important;" class="menu-link flex-stack px-3"><i class="fa fa-trash" style="color:red"></i></a>
@@ -155,7 +155,7 @@ class FileUploadController extends Controller
 
     public function downloadFile($id)
     {
-        $file = FileUploadModel::findOrFail($id);
+        $file = FileUploadModel::findOrFail(decrypt($id));
     
         $orgCode = auth()->user()->organisation_code;
         $currentYear = now()->year;
