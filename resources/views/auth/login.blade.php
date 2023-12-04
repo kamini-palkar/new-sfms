@@ -7,6 +7,9 @@
             <div class="card">
                 <div class="card-header">{{ __('SFMS LOGIN') }}</div>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -60,6 +63,45 @@
                             </div>
                         </div>
 
+                        <!-- <div class="form-group">
+                        {!! Captcha::img() !!}
+                        <input type="text" name="captcha" >
+                        
+                        @error('captcha')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                        </div> -->
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Captcha') }}</label>
+
+                            <div class="col-md-6">
+                            {!! Captcha::img() !!}
+                            <a href="javascript:void(0);" onclick="refreshCaptcha()" >
+                            <span class="glyphicon glyphicon-refresh" style="margin-left:20px;color:green"></span>
+                            </a>
+                            <!-- <button type="button" class="btn btn-success refresh-button">Refresh</button> -->
+                               
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end"></label>
+
+                            <div class="col-md-6">
+                          
+                            <input id="captcha" type="text"
+                                    class="form-control @error('captcha') is-invalid @enderror" name="captcha"
+                                     >
+
+                                @error('captcha')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
 
                        
 
@@ -77,4 +119,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function refreshCaptcha() {
+        // alert(1);
+        var captchaImg = document.querySelector('img');
+        captchaImg.src = captchaImg.src.split('?')[0] + '?' + new Date().getTime();
+    }
+</script>
 @endsection
